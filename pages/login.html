@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authorization</title>
+    <link rel="stylesheet" href="/css/auth.css" />
+</head>
+<body>
+    <section class="auth">
+        <form action="/actions/login.php" method="post">
+          <h2>Авторизація</h2>
+          <input type="email" name="email" placeholder="Логін" />
+          <input type="password" name="password" placeholder="Пароль" />
+          <div class="auth__log-reg">
+              <button class="btn" type="submit">Увійти</button>
+              <a class="register" href="register.html">Реєстрація</a>
+          </div>
+        </form>
+      </section>
+</body>
+</html>

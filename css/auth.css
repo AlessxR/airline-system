@@ -1,0 +1,79 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Comfortaa';
+  font-size: 22px;
+}
+
+ul {
+  display: flex;
+  justify-content: space-around;
+}
+
+li {
+  list-style-type: none;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.air__nav {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+li:hover {
+  color: rgb(117, 88, 52);
+}
+
+.auth, .register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 300px;
+  margin: 0 auto;
+}
+.auth h2, .register h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
+.auth input, .register input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.btn {
+  background: #1e3c72;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  width: 80%;
+}
+
+.register .btn {
+  width: 100;
+}
+.btn:hover {
+  background: #2a5298;
+}
+
+.auth__log-reg {
+  display: inline;
+}
+
+.auth__log-reg a{
+  font-size: 10px;
+  text-decoration: none;
+  color: rgb(84, 82, 82);
+}
