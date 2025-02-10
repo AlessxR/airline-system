@@ -13,20 +13,25 @@
   $password = $_POST['password'];
 
   // Є такий користувач?
-  $check_user_query = "SELECT * FROM usertbl WHERE email='$email' OR password='$password'";
-  $check_user_result = mysqli_query($link, $check_user_query);
+  $email = $_POST['email'];
+$password = $_POST['password'];
 
-  if (mysqli_num_rows($check_user_result) > 0) {
-      echo "Пользователь с таким именем или email уже существует.";
-      header("Location: /pages/register.html");
-  } else {
-    // Хеш паролю
+// Проверка, существует ли пользователь с таким email
+$check_user_query = "SELECT * FROM usertbl WHERE email='$email'";
+$check_user_result = mysqli_query($link, $check_user_query);
+
+if (mysqli_num_rows($check_user_result) > 0) {
+    echo "Пользователь с таким email уже существует.";
+    header("Location: /pages/login.html");
+} else {
+    // Хеширование пароля
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-   
-    // Нові дані в БД
+
+    // Вставка данных в БД без поля username
     $register_query = "INSERT INTO usertbl (email, password) VALUES ('$email', '$hashed_password')";
     mysqli_query($link, $register_query);
-   
+
     echo "Регистрация успешна!";
-  }
+}
+
 ?>
