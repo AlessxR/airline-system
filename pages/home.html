@@ -5,17 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Airline System</title>
     <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="/css/home.css" />
   </head>
+
   <body>
-    <nav class="air__nav">
-      <ul>
-        <li class="nav__elements">Рейси</li>
-        <li class="nav__elements">Білети</li>
-        <li class="nav__elements">Працівники</li>
-        <li class="nav__elements">Літаки</li>
+    <nav class="nav">
+      <ul class="air__navigation">
+        <li class="nav__elements" id="flightsBtn">Рейси</li>
+        <li class="nav__elements" id="ticketsBtn">Білети</li>
+        <li class="nav__elements" id="employeeBtn">Працівники</li>
+        <li class="nav__elements" id="aircraftBtn">Літаки</li>
+        <a href="login.html">Вихід з кабінету</a>
       </ul>
     </nav>
-    <script src="/scripts/main.js"></script>
+
+    <div id="dataTable"></div>
+
+    <script>
+      $(document).ready(function() {
+        function loadData(url) {
+          $.ajax({
+            url: url,
+            type: "GET",
+            success: function(data) {
+              $("#dataTable").html(data);
+            },
+            error: function(xhr, status, error) {
+              console.error("AJAX Error: " + status + '-' + error);
+            }
+          });
+      }
+
+      $("#flightsBtn").click(function() { loadData("/db/get_flights.php"); });
+      $("#ticketsBtn").click(function() { loadData("/db/get_free_tickets.php"); });
+      $("#employeeBtn").click(function() { loadData("/db/get_employee.php"); });
+      $("#aircraftBtn").click(function() { loadData("/db/get_airplanes.php"); });
+    });
+    </script>
   </body>
 </html>

@@ -6,7 +6,7 @@
 
   // Function connect to DB ~ True - success, False - unsuccess
   $link = mysqli_connect($server, $login, $password, $name_db);
-  // Получение данных формы авторизации
+  // Отримання даних з форми
   $email = $_POST['email'];
   $password = $_POST['password'];
 
