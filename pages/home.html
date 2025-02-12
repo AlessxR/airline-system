@@ -23,25 +23,68 @@
     <div id="dataTable"></div>
 
     <script>
-      $(document).ready(function() {
+      $(document).ready(function () {
         function loadData(url) {
           $.ajax({
             url: url,
-            type: "GET",
-            success: function(data) {
-              $("#dataTable").html(data);
+            type: 'GET',
+            success: function (data) {
+              $('#dataTable').html(data);
             },
-            error: function(xhr, status, error) {
-              console.error("AJAX Error: " + status + '-' + error);
-            }
+            error: function (xhr, status, error) {
+              console.error('AJAX Error:', status, error);
+            },
           });
-      }
+        }
 
-      $("#flightsBtn").click(function() { loadData("/db/get_flights.php"); });
-      $("#ticketsBtn").click(function() { loadData("/db/get_free_tickets.php"); });
-      $("#employeeBtn").click(function() { loadData("/db/get_employee.php"); });
-      $("#aircraftBtn").click(function() { loadData("/db/get_airplanes.php"); });
-    });
+        // Додавання рейсу (динамічне прив'язування до форми)
+        $(document).on('submit', '#addFlightForm', function (event) {
+          event.preventDefault();
+          let formData = $(this).serialize();
+
+          $.post('/db/utils/add_flight.php', formData, function (response) {
+            $('#flightMessage').html(response);
+            loadData('/db/getData/get_flights.php'); // Оновлюємо список рейсів
+          });
+        });
+
+        // Редагування рейсу
+        $(document).on('submit', '#editFlightForm', function (event) {
+          event.preventDefault();
+          let formData = $(this).serialize();
+
+          $.post('/db/utils/edit_flight.php', formData, function (response) {
+            $('#editMessage').html(response);
+            loadData('/db/getData/get_flights.php');
+          });
+        });
+
+        // Видалення рейсу
+        $(document).on('submit', '#deleteFlightForm', function (event) {
+          event.preventDefault();
+          let formData = $(this).serialize();
+          console.log(formData);
+          $.post('/db/utils/delete_flight.php', formData, function (response) {
+            console.log(response);
+            $('#deleteMessage').html(response);
+            loadData('/db/getData/get_flights.php');
+          });
+        });
+
+        // Завантаження таблиць
+        $('#flightsBtn').click(function () {
+          loadData('/db/getData/get_flights.php');
+        });
+        $('#ticketsBtn').click(function () {
+          loadData('/db/getData/get_free_tickets.php');
+        });
+        $('#employeeBtn').click(function () {
+          loadData('/db/getData/get_employee.php');
+        });
+        $('#aircraftBtn').click(function () {
+          loadData('/db/getData/get_airplanes.php');
+        });
+      });
     </script>
   </body>
 </html>

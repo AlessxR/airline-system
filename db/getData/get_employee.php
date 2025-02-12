@@ -7,6 +7,7 @@ $result = $link->query($sql);
 
 // Формуємо HTML-таблицю з даними працівників
 if ($result->num_rows > 0) {
+    echo "<h2>Список працівників</h2>";
     echo "<table border='1'>
             <tr>
                 <th>ID працівника</th>

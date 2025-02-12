@@ -7,6 +7,7 @@ $result = $link->query($sql);
 
 // Формуємо HTML-таблицю з даними квитків
 if ($result->num_rows > 0) {
+    echo "<h2>Список білетів</h2>";
     echo "<table border='1'>
             <tr>
                 <th>ID квитка</th>
